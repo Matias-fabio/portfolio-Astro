@@ -1,0 +1,119 @@
+---
+import { Mail, Phone, MapPin, Send } from 'lucide-react';
+---
+
+<section id="contacto" class="py-20 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+        📧 Contacto
+      </h2>
+      <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+        ¿Tienes un proyecto en mente? ¡Hablemos!
+      </p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-12">
+      <div>
+        <div class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-0 shadow-xl rounded-lg p-8">
+          <h3 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
+            Información de contacto
+          </h3>
+          
+          <div class="space-y-6">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center">
+                <Mail className="h-6 w-6 text-teal-600" />
+              </div>
+              <div>
+                <h4 class="font-medium text-slate-900 dark:text-white">Email</h4>
+                <p class="text-slate-600 dark:text-slate-300">matias@ejemplo.com</p>
+              </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+              <!-- <div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center">
+                <Phone className="h-6 w-6 text-teal-600" />
+              </div> -->
+              <!-- <div>
+                <h4 class="font-medium text-slate-900 dark:text-white">Teléfono</h4>
+                <p class="text-slate-600 dark:text-slate-300">+54 11 1234-5678</p>
+              </div> -->
+            </div>
+            
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center">
+                <MapPin className="h-6 w-6 text-teal-600" />
+              </div>
+              <div>
+                <h4 class="font-medium text-slate-900 dark:text-white">Ubicación</h4>
+                <p class="text-slate-600 dark:text-slate-300">Buenos Aires, Argentina</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-0 shadow-xl rounded-lg p-8">
+        <h3 class="text-2xl font-semibold text-slate-900 dark:text-white mb-6">
+          Envíame un mensaje
+        </h3>
+        
+        <form class="space-y-6">
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                Nombre
+              </label>
+              <input 
+                type="text"
+                placeholder="Tu nombre"
+                class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                Email
+              </label>
+              <input 
+                type="email"
+                placeholder="tu@email.com"
+                class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+              />
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              Asunto
+            </label>
+            <input 
+              type="text"
+              placeholder="Asunto del mensaje"
+              class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
+            />
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              Mensaje
+            </label>
+            <textarea 
+              placeholder="Escribe tu mensaje aquí..."
+              rows="5"
+              class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white resize-none"
+            ></textarea>
+          </div>
+          
+          <button 
+            type="submit"
+            class="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-white bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 transition-all duration-200 font-medium"
+          >
+            <Send className="mr-2 h-4 w-4" />
+            Enviar mensaje
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

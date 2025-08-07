@@ -1,0 +1,64 @@
+---
+import ThemeToggle from './ThemeToggle.tsx';
+import MobileMenu from './MobileMenu.tsx';
+---
+
+<header class="fixed top-0 w-full z-50 transition-all duration-300" id="header">
+  <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center py-4">
+      <div class="text-2xl font-bold bg-gradient-to-r from-teal-600 to-blue-600 bg-clip-text text-transparent">
+        Matias Fabio
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <button 
+          onclick="document.getElementById('inicio').scrollIntoView({behavior: 'smooth'})"
+          class="text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors bg-transparent border-b-2 border-transparent hover:border-teal-600 dark:hover:border-teal-400 hover:cursor-pointer"
+        >
+          Inicio
+        </button>
+        <button 
+          onclick="document.getElementById('sobre-mi').scrollIntoView({behavior: 'smooth'})"
+          class="text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors bg-transparent border-b-2 border-transparent hover:border-teal-600 dark:hover:border-teal-400 hover:cursor-pointer"
+        >
+          Sobre mí
+        </button>
+        <button 
+          onclick="document.getElementById('proyectos').scrollIntoView({behavior: 'smooth'})"
+          class="text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors bg-transparent border-b-2 border-transparent hover:border-teal-600 dark:hover:border-teal-400 hover:cursor-pointer"
+        >
+          Proyectos
+        </button>
+        <button 
+          onclick="document.getElementById('contacto').scrollIntoView({behavior: 'smooth'})"
+          class="text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 transition-colors bg-transparent border-b-2 border-transparent hover:border-teal-600 dark:hover:border-teal-400 hover:cursor-pointer"
+        >
+          Contacto
+        </button>
+        <ThemeToggle client:load />
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="md:hidden flex items-center space-x-2">
+        <ThemeToggle client:load />
+        <MobileMenu client:load />
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+
+  
+  // Header scroll effect
+  const header = document.getElementById('header');
+  
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.add('bg-white/80', 'dark:bg-slate-900/80', 'backdrop-blur-md', 'shadow-lg');
+    } else {
+      header?.classList.remove('bg-white/80', 'dark:bg-slate-900/80', 'backdrop-blur-md', 'shadow-lg');
+    }
+  });
+</script>

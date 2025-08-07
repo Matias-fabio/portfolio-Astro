@@ -1,0 +1,59 @@
+---
+import { GraduationCap, Calendar } from 'lucide-react';
+
+const education = [
+  {
+    title: "Técnico universitario en programación",
+    institution: "Universidad Tecnológica Nacional",
+    period: "2022 - 2025",
+    status: "Completado"
+  },
+    {
+    title: "Curso de Bases de Datos SQL",
+    institution: "CoderHouse",
+    period: "2024",
+    status: "Completado"
+  },
+  {
+    title: "Curso Full Stack Python",
+    institution: "Talento Tech",
+    period: "2024",
+    status: "Completado"
+  },
+  {
+    title: "Desarrollador Front End React",
+    institution: "CoderHouse",
+    period: "2022 - 2023",
+    status: "Completado"
+  }
+];
+---
+
+<div class="h-fit bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm border-0 shadow-xl rounded-lg">
+  <div class="p-6">
+    <h3 class="flex items-center gap-2 text-2xl font-semibold text-slate-900 dark:text-white mb-6">
+      <GraduationCap className="h-6 w-6 text-teal-600" />
+      Educación
+    </h3>
+    
+    <div class="space-y-6">
+      {education.map((item, index) => (
+        <div class="relative pl-6 border-l-2 border-teal-200 dark:border-teal-800 last:border-l-0">
+          <div class="absolute -left-2 top-0 w-4 h-4 bg-teal-600 rounded-full"></div>
+          <div>
+            <h4 class="font-semibold text-slate-900 dark:text-white mb-1">
+              {item.title}
+            </h4>
+            <p class="text-slate-600 dark:text-slate-300 mb-2">
+              {item.institution}
+            </p>
+            <div class="flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+              <Calendar className="h-4 w-4" />
+              {item.period}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</div>

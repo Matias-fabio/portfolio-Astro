@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HeroSection from '../components/HeroSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import ProjectsSection from '../components/ProjectsSection.astro';
+import EducationSection from '../components/EducationSection.astro';
+import SkillsSection from '../components/SkillsSection.astro';
+import ContactSection from '../components/ContactSection.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Matías Fabio - Desarrollador Full Stack">
+  <Header />
+  <main>
+    <HeroSection />
+    <AboutSection />
+    <ProjectsSection />
+    <div class="grid md:grid-cols-2 gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <EducationSection />
+      <SkillsSection />
+    </div>
+    <ContactSection />
+  </main>
+  <Footer />
+</Layout>
+
