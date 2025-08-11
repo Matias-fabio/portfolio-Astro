@@ -1,5 +1,12 @@
 ---
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+
+// Configuración de EmailJS - Reemplaza con tus valores reales
+const CONFIG = {
+  serviceID: 'service_vb0y0si', 
+  templateID: 'template_lqbmf9g',
+  apiKey: 'VMT6_BrM6ZsnKmyvN',
+};
 ---
 
 <section id="contacto" class="py-20 px-4 sm:px-6 lg:px-8">
@@ -27,18 +34,12 @@ import { Mail, Phone, MapPin, Send } from 'lucide-react';
               </div>
               <div>
                 <h4 class="font-medium text-slate-900 dark:text-white">Email</h4>
-                <p class="text-slate-600 dark:text-slate-300">matias@ejemplo.com</p>
+                <p class="text-slate-600 dark:text-slate-300">
+                  <span id="email-reveal" class="cursor-pointer hover:text-teal-600 transition-colors">
+                    📧 Clic para ver email
+                  </span>
+                </p>
               </div>
-            </div>
-            
-            <div class="flex items-center gap-4">
-              <!-- <div class="w-12 h-12 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center">
-                <Phone className="h-6 w-6 text-teal-600" />
-              </div> -->
-              <!-- <div>
-                <h4 class="font-medium text-slate-900 dark:text-white">Teléfono</h4>
-                <p class="text-slate-600 dark:text-slate-300">+54 11 1234-5678</p>
-              </div> -->
             </div>
             
             <div class="flex items-center gap-4">
@@ -59,24 +60,38 @@ import { Mail, Phone, MapPin, Send } from 'lucide-react';
           Envíame un mensaje
         </h3>
         
-        <form class="space-y-6">
+        <!-- Mensaje de estado -->
+        <div id="form-status" class="hidden mb-4 p-4 rounded-lg"></div>
+        
+        <form id="contact-form" class="space-y-6">
+          <!-- Honeypot para detectar bots -->
+          <div style="display: none;">
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          
           <div class="grid sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Nombre
+              <label for="user_name" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                Nombre *
               </label>
               <input 
                 type="text"
+                id="user_name"
+                name="user_name"
+                required
                 placeholder="Tu nombre"
                 class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
               />
             </div>
             <div>
-              <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-                Email
+              <label for="user_email" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+                Email *
               </label>
               <input 
                 type="email"
+                id="user_email"
+                name="user_email"
+                required
                 placeholder="tu@email.com"
                 class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
               />
@@ -84,21 +99,27 @@ import { Mail, Phone, MapPin, Send } from 'lucide-react';
           </div>
           
           <div>
-            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Asunto
+            <label for="subject" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              Asunto *
             </label>
             <input 
               type="text"
+              id="subject"
+              name="subject"
+              required
               placeholder="Asunto del mensaje"
               class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white"
             />
           </div>
           
           <div>
-            <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
-              Mensaje
+            <label for="message" class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
+              Mensaje *
             </label>
             <textarea 
+              id="message"
+              name="message"
+              required
               placeholder="Escribe tu mensaje aquí..."
               rows="5"
               class="w-full px-3 py-2 border border-slate-300 dark:border-slate-600 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-teal-500 bg-white dark:bg-slate-800 text-slate-900 dark:text-white resize-none"
@@ -107,13 +128,195 @@ import { Mail, Phone, MapPin, Send } from 'lucide-react';
           
           <button 
             type="submit"
-            class="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-white bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 transition-all duration-200 font-medium"
+            id="submit-btn"
+            class="w-full inline-flex items-center justify-center px-6 py-3 rounded-lg text-white bg-gradient-to-r from-teal-600 to-blue-600 hover:from-teal-700 hover:to-blue-700 transition-all duration-200 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <Send className="mr-2 h-4 w-4" />
-            Enviar mensaje
+            <span id="btn-text">Enviar mensaje</span>
           </button>
         </form>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  // Importar EmailJS
+  import emailjs from '@emailjs/browser';
+
+// Configuración de EmailJS 
+const CONFIG = {
+  serviceID: 'service_vb0y0si', 
+  templateID: 'template_lqbmf9g', 
+  autoReplyTemplateID: 'template_eqbokyo', 
+  apiKey: 'VMT6_BrM6ZsnKmyvN',
+};
+// Inicializar EmailJS
+emailjs.init(CONFIG.apiKey);
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // ===============================================
+  // OFUSCACIÓN DE EMAIL
+  // ===============================================
+  const emailReveal = document.getElementById('email-reveal');
+  if (emailReveal) {
+    // Email ofuscado con ROT13 - reemplaza con tu email en ROT13
+    const obfuscatedEmail = 'zngvnf@rwrzcyb.pbz'; // matias@ejemplo.com en ROT13
+    
+    function rot13(str: string) {
+      return str.replace(/[A-Za-z]/g, function(char: string) {
+        const start = char <= 'Z' ? 65 : 97;
+        return String.fromCharCode(((char.charCodeAt(0) - start + 13) % 26) + start);
+      });
+    }
+    
+    emailReveal.addEventListener('click', function() {
+      const realEmail = rot13(obfuscatedEmail);
+      const link = document.createElement('a');
+      link.href = `mailto:${realEmail}`;
+      link.textContent = realEmail;
+      link.className = 'text-teal-600 hover:text-teal-700 transition-colors';
+      this.replaceWith(link);
+    });
+  }
+
+  // MANEJO DEL FORMULARIO CON DOBLE ENVÍO
+  // ===============================================
+  const form = document.getElementById('contact-form');
+  const submitBtn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  const statusDiv = document.getElementById('form-status');
+
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // Verificar honeypot (protección contra bots)
+      const honeypotInput = form.querySelector('input[name="website"]');
+      const honeypot = honeypotInput ? (honeypotInput as HTMLInputElement).value : '';
+      if (honeypot) {
+        console.log('Bot detectado, no se enviará el formulario');
+        return;
+      }
+
+      // Validar que todos los campos requeridos estén llenos
+      if (!(form as HTMLFormElement).checkValidity()) {
+        (form as HTMLFormElement).reportValidity();
+        return;
+      }
+
+      // Estado de carga
+      (submitBtn as HTMLButtonElement).disabled = true;
+      if (btnText) {
+        btnText.textContent = 'Enviando...';
+      }
+      showStatus('Enviando mensaje...', 'loading');
+
+      try {
+        // 1. PRIMER ENVÍO: Mensaje para TI (dueño del portfolio)
+        console.log('📨 Enviando mensaje principal...');
+        const mainEmailResult = await emailjs.sendForm(
+          CONFIG.serviceID,
+          CONFIG.templateID, // Template que recibe TU email
+          form as HTMLFormElement
+        );
+        console.log('✅ Email principal enviado:', mainEmailResult);
+
+        // 2. SEGUNDO ENVÍO: Auto-respuesta para el usuario
+        console.log('📧 Enviando auto-respuesta...');
+        
+        // Crear FormData con los datos del formulario + datos adicionales para auto-respuesta
+        const formData = new FormData(form as HTMLFormElement);
+        const autoReplyData = {
+          to_email: formData.get('user_email'), // Email del usuario (CRÍTICO)
+          user_name: formData.get('user_name'),
+          user_email: formData.get('user_email'),
+          subject: formData.get('subject'),
+          message: formData.get('message'),
+          // Datos adicionales para el template de auto-respuesta
+          reply_date: new Date().toLocaleDateString('es-ES'),
+          owner_name: 'Tu Nombre', // Cambia por tu nombre
+        };
+
+        const autoReplyResult = await emailjs.send(
+          CONFIG.serviceID,
+          CONFIG.autoReplyTemplateID, // Template de auto-respuesta
+          autoReplyData
+        );
+        console.log('✅ Auto-respuesta enviada:', autoReplyResult);
+
+        showStatus('¡Mensaje enviado correctamente! Te responderé pronto.', 'success');
+        (form as HTMLFormElement).reset();
+        
+      } catch (error) {
+        console.error('❌ Error al enviar emails:', error);
+        showStatus('Error al enviar el mensaje. Por favor, inténtalo de nuevo o contacta directamente por email.', 'error');
+      } finally {
+        // Restaurar botón
+        (submitBtn as HTMLButtonElement).disabled = false;
+        if (btnText) {
+          btnText.textContent = 'Enviar mensaje';
+        }
+      }
+    });
+  }
+
+  // Función para mostrar mensajes de estado
+  function showStatus(message: string, type: 'success' | 'error' | 'loading') {
+    const typeStyles = {
+      success: 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-200 border border-green-200 dark:border-green-800',
+      error: 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-200 border border-red-200 dark:border-red-800',
+      loading: 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-200 border border-blue-200 dark:border-blue-800'
+    };
+
+    if (!statusDiv) return;
+
+    statusDiv.className = `mb-4 p-4 rounded-lg flex items-center gap-2 ${typeStyles[type]}`;
+    
+    if (type === 'loading') {
+      statusDiv.innerHTML = `
+        <div class="animate-spin rounded-full h-4 w-4 border-b-2 border-current"></div>
+        ${message}
+      `;
+    } else {
+      const icon = type === 'success' ? '✅' : '❌';
+      statusDiv.innerHTML = `${icon} ${message}`;
+    }
+    
+    statusDiv.classList.remove('hidden');
+    
+    // Auto-ocultar después de 5 segundos (excepto loading)
+    if (type !== 'loading') {
+      setTimeout(() => {
+        statusDiv.classList.add('hidden');
+      }, 5000);
+    }
+  }
+});
+</script>
+
+<style>
+
+  #contact-form input:invalid {
+    box-shadow: none;
+  }
+  
+  #contact-form input:invalid:not(:placeholder-shown) {
+    border-color: #ef4444;
+  }
+  
+  #contact-form input:valid:not(:placeholder-shown) {
+    border-color: #10b981;
+  }
+  
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+</style>
