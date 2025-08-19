@@ -1,5 +1,5 @@
 ---
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
 const projects = [
@@ -7,21 +7,22 @@ const projects = [
     id: 1,
     title: "Mi Tienda Online - (Proyecto Académico)",
     description: "E-commerce para la venta de teléfonos, tablets y accesorios.",
-    image: "/ecommerce-website-mockup.png",
+    image: "./public/91.png",
     technologies: ["C#", "ASP.NET", "SQL Server"],
     status: "completed",
     demoUrl: "#",
-    githubUrl: "https://github.com/Matias-fabio/TPC-equipo-16b"
+    githubUrl: "https://github.com/Matias-fabio/TPC-equipo-16b",
   },
   {
     id: 2,
     title: "Sistema de Gestión manicuria - (Proyecto Personal)",
-    description: "Aplicación web para gestión de turnos y clientes en un salón de manicuria.",
-    image: "/dashboard-management-system.png",
+    description:
+      "Aplicación web para gestión de turnos y clientes en un salón de manicuria.",
+    image: "./public/appMob.png",
     technologies: ["Next.js", "TypeScript", "PostgreSQL"],
     status: "in-progress",
     demoUrl: "#",
-    githubUrl: "#"
+    githubUrl: "#",
   },
   // {
   //   id: 3,
@@ -33,23 +34,28 @@ const projects = [
   //   demoUrl: "#",
   //   githubUrl: "#"
   // },
-    {
+  {
     id: 4,
     title: "App simulacion banco - (Proyecto Académico)",
     description: "Aplicación web para simulación de operaciones bancarias.",
-    image: "/mobile-task-management-app.png",
+    image: "./public/92.png",
     technologies: ["JAVA", "Servlets", "JSP", "MySQL"],
     status: "completed",
     demoUrl: "#",
-    githubUrl: "https://github.com/TomasAvalos8/TPINT_GRUPO9_LAB4"
-  }
+    githubUrl: "https://github.com/TomasAvalos8/TPINT_GRUPO9_LAB4",
+  },
 ];
 ---
 
-<section id="proyectos" class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-800/50">
+<section
+  id="proyectos"
+  class="py-20 px-4 sm:px-6 lg:px-8 bg-slate-50 dark:bg-slate-800/50"
+>
   <div class="max-w-7xl mx-auto">
     <div class="text-center mb-16">
-      <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4">
+      <h2
+        class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-4"
+      >
         💼 Proyectos
       </h2>
       <p class="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
@@ -58,53 +64,64 @@ const projects = [
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {projects.map((project) => (
-        <div class="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white dark:bg-slate-900 border-0 shadow-lg rounded-lg overflow-hidden">
-          <div class="relative overflow-hidden">
-            <img 
-              src={project.image || "/placeholder.svg"}
-              alt={project.title}
-              class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-            />
-            <div class="absolute top-4 right-4">
-              <span class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                project.status === 'completed' 
-                  ? 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200' 
-                  : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-              }`}>
-                {project.status === 'completed' ? 'Completado' : 'En desarrollo'}
-              </span>
-            </div>
-          </div>
-          
-          <div class="p-6">
-            <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">
-              {project.title}
-            </h3>
-            <p class="text-slate-600 dark:text-slate-300 mb-4">
-              {project.description}
-            </p>
-            
-            <div class="flex flex-wrap gap-2 mb-4">
-              {project.technologies.map((tech) => (
-                <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">
-                  {tech}
+      {
+        projects.map((project) => (
+          <div class="group hover:shadow-xl transition-all duration-300 hover:-translate-y-2 bg-white dark:bg-slate-900 border-0 shadow-lg rounded-lg overflow-hidden">
+            <div class="relative overflow-hidden">
+              <img
+                src={project.image || "/placeholder.svg"}
+                alt={project.title}
+                class="w-full h-72 object-cover group-hover:scale-105 transition-transform duration-300 "
+              />
+              <div class="absolute top-4 right-4">
+                <span
+                  class={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                    project.status === "completed"
+                      ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
+                      : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200"
+                  }`}
+                >
+                  {project.status === "completed"
+                    ? "Completado"
+                    : "En desarrollo"}
                 </span>
-              ))}
+              </div>
             </div>
-            
-            <div class="flex gap-2">
-              <button class="flex-1 inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
-                <ExternalLink className="mr-2 h-4 w-4" />
-                Ver Demo
-              </button>
-              <a href={project.githubUrl} class="inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors" target="_blank" rel="noopener noreferrer">
-                <FaGithub className="h-4 w-4" />
-              </a>
+
+            <div class="p-6">
+              <h3 class="text-xl font-semibold text-slate-900 dark:text-white mb-2">
+                {project.title}
+              </h3>
+              <p class="text-slate-600 dark:text-slate-300 mb-4">
+                {project.description}
+              </p>
+
+              <div class="flex flex-wrap gap-2 mb-4">
+                {project.technologies.map((tech) => (
+                  <span class="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-slate-100 text-slate-800 dark:bg-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-600">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div class="flex gap-2">
+                <button class="flex-1 inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 dark:bg-slate-700 dark:hover:bg-slate-600 transition-colors">
+                  <ExternalLink className="mr-2 h-4 w-4" />
+                  Ver Demo
+                </button>
+                <a
+                  href={project.githubUrl}
+                  class="inline-flex items-center justify-center px-4 py-2 rounded-md text-sm font-medium border border-slate-300 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaGithub className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>
